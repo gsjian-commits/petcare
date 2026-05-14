@@ -1,0 +1,40 @@
+<view class="page-pet-list">
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{pets.length === 0}}">
+    <text class="empty-icon">🐾</text>
+    <text class="empty-title">还没有宠物档案</text>
+    <text class="empty-desc">添加你的第一个毛孩子，<text>开始预约服务吧</text></text>
+  </view>
+
+  <!-- 宠物列表 -->
+  <view class="pet-list" wx:else>
+    <view
+      class="pet-card"
+      wx:for="{{pets}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="handlePetTap"
+    >
+      <view class="pet-avatar" style="background-color: {{item.avatarBg}}">
+        <text class="pet-avatar-icon">{{item.avatar}}</text>
+      </view>
+      <view class="pet-info">
+        <view class="pet-info-top">
+          <text class="pet-name">{{item.name}}</text>
+          <text class="pet-gender">{{item.gender === 'male' ? '♂' : '♀'}}</text>
+        </view>
+        <text class="pet-breed">{{item.breed}}</text>
+        <text class="pet-age">{{item.age || '?'}}岁·{{item.weight || '?'}}kg</text>
+      </view>
+      <view class="pet-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn-wrap" bindtap="handleAddPet">
+    <view class="add-btn">
+      <text class="add-btn-icon">＋</text>
+      <text class="add-btn-text">添加宠物</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,215 @@
+<view class="page-order-create">
+  <!-- 加载 -->
+  <view class="loading-view" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 1. 服务信息 -->
+    <view class="oc-section">
+      <view class="service-info">
+        <view class="service-icon" style="background-color: {{service.imageBg}}">
+          <text>{{service.imageIcon}}</text>
+        </view>
+        <view class="service-meta">
+          <text class="service-name">{{service.name}}</text>
+          <text class="service-duration">⏱ {{service.duration}}</text>
+          <text class="service-price">
+            <text class="price-symbol">¥</text>
+            <text class="price-value">{{service.price}}</text>
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 2. 选择宠物 -->
+    <view class="oc-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">选择宠物</text>
+        <view class="oc-section-action" wx:if="{{pets.length > 0}}" bindtap="handleAddPet">
+          <text>＋ 添加宠物</text>
+        </view>
+      </view>
+
+      <view class="no-pets" wx:if="{{pets.length === 0}}">
+        <text class="no-pets-icon">🐾</text>
+        <text class="no-pets-text">暂无宠物档案，请先添加</text>
+        <view class="no-pets-btn" bindtap="handleAddPet">＋ 添加宠物</view>
+      </view>
+
+      <view class="pet-select-list" wx:else>
+        <view
+          class="pet-select-item {{selectedPetId === item.id ? 'pet-select-active' : ''}}"
+          wx:for="{{pets}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="handlePetSelect"
+        >
+          <view class="pet-select-avatar" style="background-color: {{item.avatarBg}}">
+            <text>{{item.avatar}}</text>
+          </view>
+          <view class="pet-select-info">
+            <text class="pet-select-name">{{item.name}}</text>
+            <text class="pet-select-breed">{{item.breed}}·{{item.age}}岁</text>
+          </view>
+          <view class="pet-select-check">
+            <text class="check-icon {{selectedPetId === item.id ? 'check-icon-active' : ''}}">{{selectedPetId === item.id ? '✓' : '○'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 预约日期 -->
+    <view class="oc-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">选择日期</text>
+      </view>
+      <view class="date-grid">
+        <view
+          class="date-item {{item.available ? '' : 'date-disabled'}} {{selectedDate === item.date ? 'date-selected' : ''}}"
+          wx:for="{{dates}}"
+          wx:key="date"
+          data-date="{{item.date}}"
+          bindtap="handleDateSelect"
+        >
+          <text class="date-weekday">{{item.dayOfWeek === '日' ? '周日' : '周' + item.dayOfWeek}}</text>
+          <text class="date-day">{{item.day}}</text>
+          <view class="date-indicator" wx:if="{{item.isToday}}">
+            <text class="date-today">今天</text>
+          </view>
+          <view class="date-indicator" wx:elif="{{!item.available}}">
+            <text class="date-full">已满</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 4. 时段选择 -->
+    <view class="oc-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">选择时段</text>
+      </view>
+      <view class="time-grid">
+        <view
+          class="time-item {{selectedTimeSlot === 'morning' ? 'time-selected' : ''}}"
+          data-slot="morning"
+          bindtap="handleTimeSelect"
+        >
+          <text class="time-label">上午</text>
+          <text class="time-range">9:00-12:00</text>
+        </view>
+        <view
+          class="time-item {{selectedTimeSlot === 'afternoon' ? 'time-selected' : ''}}"
+          data-slot="afternoon"
+          bindtap="handleTimeSelect"
+        >
+          <text class="time-label">下午</text>
+          <text class="time-range">14:00-18:00</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 5. 服务地址 -->
+    <view class="oc-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">服务地址</text>
+        <view class="oc-section-action" bindtap="handleAddAddress">
+          <text>＋ 新增</text>
+        </view>
+      </view>
+
+      <view class="no-address" wx:if="{{addresses.length === 0}}" bindtap="handleAddAddress">
+        <text class="no-address-text">请添加服务地址</text>
+        <text class="form-arrow">›</text>
+      </view>
+
+      <view
+        class="address-item {{selectedAddressId === item.id ? 'address-active' : ''}}"
+        wx:for="{{addresses}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="handleAddressSelect"
+      >
+        <view class="address-left">
+          <view class="address-tags" wx:if="{{item.isDefault}}">
+            <text class="address-tag-default">默认</text>
+          </view>
+          <text class="address-detail">{{item.district}} {{item.detail}}</text>
+          <text class="address-user">{{item.name}} {{item.phone}}</text>
+        </view>
+        <view class="address-check">
+          <text class="check-icon {{selectedAddressId === item.id ? 'check-icon-active' : ''}}">{{selectedAddressId === item.id ? '✓' : '○'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 6. 优惠券 -->
+    <view class="oc-section" bindtap="handleCouponSelect">
+      <view class="coupon-row">
+        <text class="oc-section-title">优惠券</text>
+        <view class="coupon-right">
+          <text class="coupon-tip" wx:if="{{selectedCoupon}}">
+            <text wx:if="{{selectedCoupon.type === 'amount'}}">已减¥{{selectedCoupon.value}}</text>
+            <text wx:elif="{{selectedCoupon.type === 'percent'}}">已减{{selectedCoupon.value}}%</text>
+          </text>
+          <text class="coupon-tip coupon-tip-empty" wx:else>暂不使用</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 7. 备注 -->
+    <view class="oc-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">备注</text>
+      </view>
+      <textarea
+        class="remark-input"
+        placeholder="如有特殊需求请在此说明（最多200字）"
+        value="{{remark}}"
+        maxlength="200"
+        bindinput="handleRemarkInput"
+      ></textarea>
+      <text class="remark-counter">{{remark.length}}/200</text>
+    </view>
+
+    <!-- 8. 价格明细 -->
+    <view class="oc-section price-summary-section">
+      <view class="oc-section-header">
+        <text class="oc-section-title">价格明细</text>
+      </view>
+      <view class="price-row">
+        <text class="price-row-label">服务原价</text>
+        <text class="price-row-value">¥{{service.price}}</text>
+      </view>
+      <view class="price-row" wx:if="{{selectedCoupon}}">
+        <text class="price-row-label">优惠券</text>
+        <text class="price-row-value price-row-discount">
+          -¥{{couponDiscount}}
+        </text>
+      </view>
+      <view class="price-row price-total-row">
+        <text class="price-row-label">实付</text>
+        <text class="price-total">
+          <text class="price-total-symbol">¥</text>
+          <text class="price-total-value">{{finalPrice}}</text>
+        </text>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="bottom-safe-area"></view>
+  </block>
+
+  <!-- 底部提交按钮 -->
+  <view class="bottom-bar">
+    <view class="bottom-bar-left">
+      <text class="bottom-price-label">合计</text>
+      <text class="bottom-price-symbol">¥</text>
+      <text class="bottom-price-value">{{finalPrice}}</text>
+    </view>
+    <view class="bottom-submit {{!canSubmit ? 'bottom-submit-disabled' : ''}}" bindtap="handleSubmit">
+      <text>提交预约</text>
+    </view>
+  </view>
+</view>

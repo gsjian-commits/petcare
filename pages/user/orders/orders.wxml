@@ -1,0 +1,173 @@
+<view class="page-orders">
+  <!-- 状态Tab -->
+  <view class="order-tabs">
+    <view
+      class="order-tab {{currentTab === 'all' ? 'order-tab-active' : ''}}"
+      data-tab="all"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">全部</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'all'}}"></view>
+    </view>
+    <view
+      class="order-tab {{currentTab === 'pending_payment' ? 'order-tab-active' : ''}}"
+      data-tab="pending_payment"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">待支付</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'pending_payment'}}"></view>
+    </view>
+    <view
+      class="order-tab {{currentTab === 'pending_service' ? 'order-tab-active' : ''}}"
+      data-tab="pending_service"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">待服务</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'pending_service'}}"></view>
+    </view>
+    <view
+      class="order-tab {{currentTab === 'in_progress' ? 'order-tab-active' : ''}}"
+      data-tab="in_progress"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">进行中</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'in_progress'}}"></view>
+    </view>
+    <view
+      class="order-tab {{currentTab === 'completed' ? 'order-tab-active' : ''}}"
+      data-tab="completed"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">已完成</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'completed'}}"></view>
+    </view>
+    <view
+      class="order-tab {{currentTab === 'cancelled' ? 'order-tab-active' : ''}}"
+      data-tab="cancelled"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">已取消</text>
+      <view class="tab-indicator" wx:if="{{currentTab === 'cancelled'}}"></view>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{orders.length === 0 && !loading}}">
+      <text class="empty-icon">📦</text>
+      <text class="empty-title">暂无订单</text>
+      <text class="empty-desc">去首页发现更多宠物服务吧</text>
+      <view class="empty-btn" bindtap="goHome">去首页看看</view>
+    </view>
+
+    <!-- 加载中 -->
+    <view class="loading-view" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 订单卡片 -->
+    <view
+      class="order-card"
+      wx:for="{{orders}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onOrderTap"
+    >
+      <view class="order-card-header">
+        <view class="card-service-info">
+          <view class="card-service-icon" style="background-color: {{item.serviceBg}}">
+            <text>{{item.serviceIcon}}</text>
+          </view>
+          <view class="card-service-meta">
+            <text class="card-service-name">{{item.serviceName}}</text>
+            <text class="card-pet-name">{{item.petName}} · {{item.date}}</text>
+          </view>
+        </view>
+        <text class="card-status {{'card-status-' + item.status}}">{{item.statusLabel}}</text>
+      </view>
+
+      <view class="order-card-body">
+        <view class="card-info-row">
+          <text class="info-label">服务时间</text>
+          <text class="info-value">{{item.date}} {{item.timeLabel}}</text>
+        </view>
+        <view class="card-info-row">
+          <text class="info-label">服务地址</text>
+          <text class="info-value info-address">{{item.address}}</text>
+        </view>
+        <view class="card-info-row" wx:if="{{item.staffName}}">
+          <text class="info-label">服务管家</text>
+          <text class="info-value">{{item.staffName}}</text>
+        </view>
+      </view>
+
+      <view class="order-card-footer">
+        <view class="card-amount">
+          <text class="amount-label">合计</text>
+          <text class="amount-symbol">¥</text>
+          <text class="amount-value">{{item.amount}}</text>
+        </view>
+        <view class="card-actions">
+          <view
+            class="card-action {{item.status === 'pending_payment' ? 'action-primary' : 'action-default'}}"
+            wx:if="{{item.status === 'pending_payment'}}"
+            data-action="pay"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>去支付</text>
+          </view>
+          <view
+            class="card-action action-default"
+            wx:if="{{item.status === 'pending_payment'}}"
+            data-action="cancel"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>取消订单</text>
+          </view>
+          <view
+            class="card-action action-default"
+            wx:if="{{item.status === 'in_progress'}}"
+            data-action="contact"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>联系管家</text>
+          </view>
+          <view
+            class="card-action action-primary"
+            wx:if="{{item.status === 'completed'}}"
+            data-action="review"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>{{item.hasReport ? '查看报告' : '去评价'}}</text>
+          </view>
+          <view
+            class="card-action action-default"
+            wx:if="{{item.status === 'completed'}}"
+            data-action="rebook"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>再次预约</text>
+          </view>
+          <view
+            class="card-action action-default"
+            wx:if="{{item.status === 'cancelled'}}"
+            data-action="rebook"
+            data-id="{{item.id}}"
+            catchtap="onActionTap"
+          >
+            <text>重新预约</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe-area"></view>
+</view>

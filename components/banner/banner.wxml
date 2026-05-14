@@ -1,0 +1,36 @@
+<view class="banner-wrap">
+  <swiper
+    class="banner-swiper"
+    indicator-dots="{{true}}"
+    indicator-color="rgba(255,255,255,0.4)"
+    indicator-active-color="#FFFFFF"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    circular="{{true}}"
+    bindchange="onSwiperChange"
+  >
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <view class="banner-slide" style="background-color: {{item.bgColor}}">
+        <view class="banner-content">
+          <view class="banner-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+          <view class="banner-title">{{item.title}}</view>
+          <view class="banner-subtitle">{{item.subtitle}}</view>
+          <view class="banner-cta" bindtap="onTapCTA">
+            立即预约
+          </view>
+        </view>
+        <view class="banner-decor">
+          <view class="decor-circle decor-1"></view>
+          <view class="decor-circle decor-2"></view>
+          <view class="decor-paw">🐾</view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="banner-counter" wx:if="{{banners.length > 1}}">
+    <text>{{currentIndex + 1}}</text>
+    <text class="counter-divider">/</text>
+    <text>{{banners.length}}</text>
+  </view>
+</view>

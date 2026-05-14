@@ -1,0 +1,74 @@
+<view class="page-home">
+  <!-- 区块A - 顶部品牌区 -->
+  <view class="brand-header" style="padding-top: {{statusBarHeight + 12}}px">
+    <view class="brand-logo">
+      <text class="logo-icon">🐾</text>
+      <text class="logo-text">宠管家</text>
+    </view>
+    <view class="brand-location" bindtap="onTapLocation">
+      <text class="location-icon">📍</text>
+      <text class="location-text">天津</text>
+    </view>
+  </view>
+
+  <!-- 区块B - Hero Banner 轮播 -->
+  <view class="section-banner">
+    <app-banner
+      banners="{{banners}}"
+      bindctatap="onBannerCTA"
+    />
+  </view>
+
+  <!-- 区块C - 活动通知栏 -->
+  <view class="section-notice" wx:if="{{showNotice && notices.length > 0}}">
+    <view class="notice-bar">
+      <text class="notice-icon">🔔</text>
+      <view class="notice-content">
+        <text class="notice-text">{{notices[currentNoticeIndex].text}}</text>
+      </view>
+      <view class="notice-close" bindtap="handleCloseNotice">
+        <text>✕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 区块D - 服务分类导航 -->
+  <view class="section-service">
+    <service-grid
+      services="{{services}}"
+      bindselect="onServiceSelect"
+    />
+  </view>
+
+  <!-- 区块E - 套餐推荐区 -->
+  <view class="section-package">
+    <view class="section-header">
+      <text class="section-title">精选套餐</text>
+      <text class="section-more" bindtap="onTapMorePackages">查看全部 →</text>
+    </view>
+    <package-card
+      packages="{{packages}}"
+      bindselect="onPackageSelect"
+    />
+  </view>
+
+  <!-- 区块F - 信任要素横条 -->
+  <view class="section-trust">
+    <trust-bar items="{{trustItems}}" />
+  </view>
+
+  <!-- 区块G - 案例展示区 -->
+  <view class="section-case">
+    <view class="section-header">
+      <text class="section-title">真实案例</text>
+      <text class="section-more" bindtap="onTapMoreCases">查看更多 →</text>
+    </view>
+    <case-card
+      cases="{{cases}}"
+      bindselect="onCaseSelect"
+    />
+  </view>
+
+  <!-- 底部安全区域 -->
+  <view class="bottom-safe-area"></view>
+</view>

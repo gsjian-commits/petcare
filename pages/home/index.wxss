@@ -1,0 +1,155 @@
+.page-home {
+  min-height: 100vh;
+  background-color: var(--color-bg-page);
+  padding-bottom: 100rpx;
+}
+
+/* 区块A - 顶部品牌区 */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.logo-icon {
+  font-size: 40rpx;
+}
+
+.logo-text {
+  font-size: var(--font-xl);
+  font-weight: var(--weight-bold);
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+}
+
+.brand-location {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+.location-icon {
+  font-size: var(--font-sm);
+}
+
+.location-text {
+  font-size: var(--font-sm);
+  color: #FFFFFF;
+}
+
+/* 区块B - Banner */
+.section-banner {
+  margin-top: -2rpx;
+}
+
+/* 区块C - 活动通知栏 */
+.section-notice {
+  padding: 0 24rpx;
+  margin-top: 16rpx;
+}
+
+.notice-bar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background: var(--color-primary-bg);
+  border-radius: var(--radius-md);
+  padding: 16rpx 20rpx;
+  border: 1rpx solid rgba(255, 107, 53, 0.1);
+}
+
+.notice-icon {
+  font-size: var(--font-lg);
+  flex-shrink: 0;
+}
+
+.notice-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.notice-text {
+  font-size: var(--font-sm);
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.notice-close {
+  flex-shrink: 0;
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.notice-close text {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+/* 区块D - 服务分类 */
+.section-service {
+  margin-top: 24rpx;
+  padding: 24rpx 0;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+/* 区块E - 套餐推荐 */
+.section-package {
+  margin-top: 32rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: var(--font-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.section-more {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+/* 区块F - 信任要素 */
+.section-trust {
+  margin-top: 32rpx;
+}
+
+/* 区块G - 案例展示 */
+.section-case {
+  margin-top: 32rpx;
+}
+
+/* 底部安全区 */
+.bottom-safe-area {
+  height: 40rpx;
+}

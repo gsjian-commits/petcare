@@ -1,0 +1,131 @@
+<view class="page-order-detail">
+  <!-- 加载 -->
+  <view class="loading-view" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 1. 订单状态区 -->
+    <view class="status-section {{'status-bg-' + order.status}}">
+      <view class="status-icon-wrap">
+        <text class="status-icon" wx:if="{{order.status === 'pending_payment'}}">⏳</text>
+        <text class="status-icon" wx:elif="{{order.status === 'pending_service'}}">📅</text>
+        <text class="status-icon" wx:elif="{{order.status === 'in_progress'}}">🛵</text>
+        <text class="status-icon" wx:elif="{{order.status === 'completed'}}">✅</text>
+        <text class="status-icon" wx:elif="{{order.status === 'cancelled'}}">❌</text>
+      </view>
+      <text class="status-text">{{order.statusLabel}}</text>
+      <text class="status-hint" wx:if="{{order.status === 'pending_payment'}}">请尽快完成支付，逾期自动取消</text>
+      <text class="status-hint" wx:elif="{{order.status === 'pending_service'}}">管家将在服务前与您确认具体时间</text>
+      <text class="status-hint" wx:elif="{{order.status === 'in_progress'}}">管家正在为您服务中</text>
+      <text class="status-hint" wx:elif="{{order.status === 'completed'}}">感谢您的信任，期待再次为您服务</text>
+      <text class="status-hint" wx:elif="{{order.status === 'cancelled'}}">订单已取消，如需服务请重新预约</text>
+    </view>
+
+    <!-- 2. 服务信息 -->
+    <view class="od-section">
+      <view class="od-section-header">
+        <text class="od-section-title">服务信息</text>
+      </view>
+      <view class="service-info-card">
+        <view class="service-info-icon" style="background-color: {{order.serviceBg}}">
+          <text>{{order.serviceIcon}}</text>
+        </view>
+        <view class="service-info-meta">
+          <text class="service-info-name">{{order.serviceName}}</text>
+          <text class="service-info-pet">{{order.petName}} · {{order.date}} {{order.timeLabel}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 服务管家 -->
+    <view class="od-section" wx:if="{{order.staffName}}">
+      <view class="od-section-header">
+        <text class="od-section-title">服务管家</text>
+      </view>
+      <view class="staff-info-card">
+        <text class="staff-info-avatar">👤</text>
+        <view class="staff-info-meta">
+          <text class="staff-info-name">{{order.staffName}}</text>
+          <text class="staff-info-label">专属管家</text>
+        </view>
+        <view class="staff-info-contact" bindtap="contactStaff">
+          <text>📞 联系</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 4. 时间地址 -->
+    <view class="od-section">
+      <view class="od-section-header">
+        <text class="od-section-title">服务详情</text>
+      </view>
+      <view class="detail-rows">
+        <view class="detail-row">
+          <text class="detail-label">服务日期</text>
+          <text class="detail-value">{{order.date}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">服务时段</text>
+          <text class="detail-value">{{order.timeLabel}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">服务地址</text>
+          <text class="detail-value detail-address">{{order.address}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-label">下单时间</text>
+          <text class="detail-value">{{order.createdAt}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 5. 价格明细 -->
+    <view class="od-section">
+      <view class="od-section-header">
+        <text class="od-section-title">价格明细</text>
+      </view>
+      <view class="price-rows">
+        <view class="price-row">
+          <text class="price-label">服务原价</text>
+          <text class="price-value">¥{{order.originalAmount}}</text>
+        </view>
+        <view class="price-row" wx:if="{{order.couponDiscount > 0}}">
+          <text class="price-label">优惠券减免</text>
+          <text class="price-value price-discount">-¥{{order.couponDiscount}}</text>
+        </view>
+        <view class="price-divider"></view>
+        <view class="price-row price-total">
+          <text class="price-label">实付金额</text>
+          <text class="price-value price-total-value">
+            <text class="total-symbol">¥</text>
+            <text class="total-amount">{{order.amount}}</text>
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 6. 操作按钮 -->
+    <view class="action-section">
+      <view class="action-row" wx:if="{{order.status === 'pending_payment'}}">
+        <view class="action-btn action-btn-secondary" bindtap="handleCancel">取消订单</view>
+        <view class="action-btn action-btn-primary" bindtap="handlePay">去支付</view>
+      </view>
+      <view class="action-row" wx:if="{{order.status === 'pending_service' || order.status === 'in_progress'}}">
+        <view class="action-btn action-btn-secondary" bindtap="contactStaff">联系管家</view>
+        <view class="action-btn action-btn-secondary" bindtap="handleReschedule">申请改期</view>
+      </view>
+      <view class="action-row" wx:if="{{order.status === 'completed'}}">
+        <view class="action-btn action-btn-secondary" bindtap="handleRebook">再次预约</view>
+        <view class="action-btn action-btn-primary" wx:if="{{order.hasReport}}" bindtap="handleViewReport">查看报告</view>
+        <view class="action-btn action-btn-primary" wx:else bindtap="handleReview">去评价</view>
+      </view>
+      <view class="action-row" wx:if="{{order.status === 'cancelled'}}">
+        <view class="action-btn action-btn-primary" bindtap="handleRebook">重新预约</view>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="bottom-safe-area"></view>
+  </block>
+</view>

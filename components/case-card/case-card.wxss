@@ -1,0 +1,80 @@
+/* ===== 案例卡片组件（瀑布流两列） ===== */
+.case-wall {
+  display: flex;
+  gap: 20rpx;
+  padding: 0 24rpx;
+}
+
+.case-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  padding: 28rpx 24rpx;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.case-card:active {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-md);
+}
+
+/* 不同卡片高度 - 用内边距和内容量自然产生差异 */
+.case-avatar {
+  font-size: 64rpx;
+  display: block;
+  margin-bottom: 16rpx;
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.case-title {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 10rpx;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.case-desc {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: auto;
+}
+
+.case-tag {
+  font-size: 20rpx;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4rpx 14rpx;
+  border-radius: 12rpx;
+  font-weight: var(--weight-medium);
+}

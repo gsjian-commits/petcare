@@ -1,0 +1,80 @@
+<view class="page-list">
+  <view class="category-tabs">
+    <scroll-view class="tabs-scroll" scroll-x="{{true}}" enhanced show-scrollbar="{{false}}">
+      <view class="tabs-row">
+        <view
+          class="tab-item {{activeCategoryId === item.id ? 'tab-active' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="handleTabChange"
+        >
+          <view
+            class="tab-icon"
+            style="background-color: {{activeCategoryId === item.id ? item.bgColor : '#F5F5F5'}}"
+          >
+            <text>{{item.icon}}</text>
+          </view>
+          <text class="tab-name">{{item.name}}</text>
+          <view class="tab-indicator" wx:if="{{activeCategoryId === item.id}}"></view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="service-count" wx:if="{{serviceList.length > 0}}">
+    <text>共 {{serviceList.length}} 个服务</text>
+  </view>
+
+  <view class="service-list">
+    <view
+      class="service-card"
+      wx:for="{{serviceList}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="handleServiceTap"
+    >
+      <view class="card-image" style="background-color: {{item.imageBg}}">
+        <text class="card-image-icon">{{item.imageIcon}}</text>
+      </view>
+      <view class="card-body">
+        <view class="card-info">
+          <text class="card-name">{{item.name}}</text>
+          <text class="card-desc">{{item.desc}}</text>
+          <view class="card-meta">
+            <view class="meta-item">
+              <text class="meta-icon">⏱</text>
+              <text class="meta-text">{{item.duration}}</text>
+            </view>
+            <view class="meta-item">
+              <text class="meta-icon">⭐</text>
+              <text class="meta-text">{{item.rating}}</text>
+              <text class="meta-count">({{item.reviewCount}})</text>
+            </view>
+          </view>
+          <view class="card-tags">
+            <text class="card-tag" wx:for="{{item.features}}" wx:for-item="f" wx:key="*this" wx:if="{{index < 3}}">{{f}}</text>
+          </view>
+        </view>
+        <view class="card-price">
+          <view class="price-row">
+            <text class="price-symbol">¥</text>
+            <text class="price-value">{{item.price}}</text>
+            <text class="price-unit" wx:if="{{item.duration === '天' || item.duration === '按次'}}">/{{item.duration}}</text>
+          </view>
+          <text class="price-original" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+          <view class="btn-book" data-id="{{item.id}}" catchtap="handleBookTap">
+            <text>预约</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-hint" wx:if="{{serviceList.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">该分类下暂无服务</text>
+    </view>
+  </view>
+
+  <view class="bottom-safe"></view>
+</view>

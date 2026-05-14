@@ -1,0 +1,74 @@
+/* 品牌色系 */
+page {
+  /* 主色 - 活力橙 */
+  --color-primary: #FF6B35;
+  --color-primary-light: #FF8C5A;
+  --color-primary-dark: #E5592A;
+  --color-primary-bg: #FFF4EF;
+
+  /* 辅助色 */
+  --color-accent: #4ECDC4;
+  --color-accent-light: #7EDDD6;
+  --color-accent-dark: #3DBDB5;
+
+  /* 功能色 */
+  --color-success: #2ECC71;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+  --color-info: #3498DB;
+
+  /* 中性色 */
+  --color-white: #FFFFFF;
+  --color-bg-page: #F8F8F8;
+  --color-bg-card: #FFFFFF;
+  --color-border: #EEEEEE;
+  --color-divider: #F0F0F0;
+
+  /* 文字色 */
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-hint: #999999;
+  --text-placeholder: #CCCCCC;
+  --text-inverse: #FFFFFF;
+
+  /* 圆角 */
+  --radius-sm: 8rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
+  --radius-round: 50%;
+
+  /* 间距 */
+  --space-xs: 8rpx;
+  --space-sm: 16rpx;
+  --space-md: 24rpx;
+  --space-lg: 32rpx;
+  --space-xl: 48rpx;
+  --space-xxl: 64rpx;
+
+  /* 阴影 */
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+
+  /* 字体大小 */
+  --font-xs: 20rpx;
+  --font-sm: 24rpx;
+  --font-md: 28rpx;
+  --font-lg: 32rpx;
+  --font-xl: 36rpx;
+  --font-xxl: 44rpx;
+  --font-hero: 56rpx;
+
+  /* 字重 */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* 动画 */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}

@@ -1,0 +1,38 @@
+<view class="case-wall">
+  <view class="case-column">
+    <block wx:for="{{cases}}" wx:key="id">
+      <view
+        class="case-card"
+        wx:if="{{index % 2 === 0}}"
+        data-id="{{item.id}}"
+        bindtap="onTapCase"
+        style="background-color: {{item.bgColor}}"
+      >
+        <text class="case-avatar">{{item.avatar}}</text>
+        <text class="case-title">{{item.title}}</text>
+        <text class="case-desc">{{item.desc}}</text>
+        <view class="case-tags">
+          <text class="case-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="case-column">
+    <block wx:for="{{cases}}" wx:key="id">
+      <view
+        class="case-card"
+        wx:if="{{index % 2 === 1}}"
+        data-id="{{item.id}}"
+        bindtap="onTapCase"
+        style="background-color: {{item.bgColor}}"
+      >
+        <text class="case-avatar">{{item.avatar}}</text>
+        <text class="case-title">{{item.title}}</text>
+        <text class="case-desc">{{item.desc}}</text>
+        <view class="case-tags">
+          <text class="case-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

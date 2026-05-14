@@ -1,0 +1,54 @@
+/* ===== 信任横条组件 ===== */
+.trust-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: 24rpx 16rpx;
+  margin: 0 24rpx;
+  border-radius: var(--radius-lg);
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  flex: 1;
+  position: relative;
+}
+
+.trust-item + .trust-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rpx;
+  height: 40rpx;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 1rpx;
+}
+
+.trust-icon {
+  font-size: 40rpx;
+  display: block;
+}
+
+.trust-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.trust-title {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-inverse);
+}
+
+.trust-desc {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.8);
+}

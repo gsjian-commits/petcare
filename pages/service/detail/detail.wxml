@@ -1,0 +1,165 @@
+<view class="page-detail">
+  <!-- 加载状态 -->
+  <view class="loading-view" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 1. 头部区域 - emoji图标背景 + 服务名称 + 评分 -->
+    <view class="detail-header" style="background-color: {{service.imageBg || '#FF6B35'}}">
+      <view class="header-back">
+        <text class="header-back-btn" bindtap="handleBack">← 返回</text>
+      </view>
+      <text class="header-icon">{{service.imageIcon || '🐾'}}</text>
+      <text class="header-name">{{service.name}}</text>
+      <view class="header-rating">
+        <text class="rating-star" wx:for="{{starList}}" wx:for-item="star" wx:for-index="i" wx:key="i">{{star ? '⭐' : '☆'}}</text>
+        <text class="rating-value">{{service.rating}}</text>
+        <text class="rating-count">{{service.reviewCount}}条评价</text>
+      </view>
+    </view>
+
+    <!-- 2. 价格区域（单次/套餐Tab切换） -->
+    <view class="detail-section price-section">
+      <view class="pricing-tabs">
+        <view
+          class="pricing-tab {{activePricingTab === 'single' ? 'pricing-tab-active' : ''}}"
+          data-tab="single"
+          bindtap="handlePricingTabChange"
+        >
+          <text class="pricing-tab-text">单次服务</text>
+        </view>
+        <view
+          class="pricing-tab {{activePricingTab === 'package' ? 'pricing-tab-active' : ''}}"
+          data-tab="package"
+          bindtap="handlePricingTabChange"
+        >
+          <text class="pricing-tab-text">服务套餐</text>
+        </view>
+      </view>
+
+      <!-- 单次价格 -->
+      <view class="pricing-body" wx:if="{{activePricingTab === 'single'}}">
+        <view class="single-price-row">
+          <text class="price-label">单次价格</text>
+          <view class="price-value-row">
+            <text class="price-symbol">¥</text>
+            <text class="price-current">{{service.price}}</text>
+            <text class="price-original" wx:if="{{service.originalPrice}}">¥{{service.originalPrice}}</text>
+          </view>
+          <text class="price-unit">/{{service.duration}}</text>
+        </view>
+        <view class="price-features">
+          <text class="price-feature">✓ 首次下单享8折</text>
+          <text class="price-feature">✓ 新用户送50元券</text>
+        </view>
+      </view>
+
+      <!-- 套餐价格 -->
+      <view class="pricing-body" wx:if="{{activePricingTab === 'package'}}">
+        <view class="package-list-pricing">
+          <view class="package-pricing-card {{selectedPackageIndex === index ? 'package-pricing-active' : ''}}"
+            wx:for="{{packageOptions}}"
+            wx:key="index"
+            data-index="{{index}}"
+            bindtap="handlePackageSelect"
+          >
+            <view class="package-pricing-left">
+              <text class="package-pricing-name">{{item.name}}</text>
+              <text class="package-pricing-desc">{{item.desc}}</text>
+            </view>
+            <view class="package-pricing-right">
+              <text class="package-pricing-total">¥{{item.total}}</text>
+              <text class="package-pricing-avg">¥{{item.avg}}/次</text>
+              <text class="package-pricing-save">省¥{{item.save}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 服务流程 -->
+    <view class="detail-section" wx:if="{{service.process && service.process.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">服务流程</text>
+      </view>
+      <view class="process-list">
+        <view class="process-step" wx:for="{{service.process}}" wx:key="step">
+          <view class="step-number">{{item.step}}</view>
+          <view class="step-content">
+            <text class="step-title">{{item.title}}</text>
+            <text class="step-desc">{{item.desc}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 4. 服务介绍 -->
+    <view class="detail-section">
+      <view class="section-header">
+        <text class="section-title">服务介绍</text>
+      </view>
+      <view class="intro-body">
+        <text class="intro-desc">{{service.desc}}</text>
+        <view class="intro-tags" wx:if="{{service.features && service.features.length > 0}}">
+          <text class="intro-tag" wx:for="{{service.features}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 5. 温馨提示 / 注意事项 -->
+    <view class="detail-section" wx:if="{{service.notice}}">
+      <view class="section-header">
+        <text class="section-title-icon">⚠️</text>
+        <text class="section-title">温馨提示</text>
+      </view>
+      <view class="notice-body">
+        <text class="notice-text">{{service.notice}}</text>
+      </view>
+    </view>
+
+    <!-- 6. 用户评价 -->
+    <view class="detail-section" wx:if="{{reviews && reviews.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">用户评价</text>
+        <text class="section-count">共 {{reviews.length}} 条</text>
+      </view>
+      <view class="review-list">
+        <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+          <view class="review-user">
+            <text class="review-avatar">{{item.avatar}}</text>
+            <view class="review-user-info">
+              <text class="review-username">{{item.userName}}</text>
+              <view class="review-meta">
+                <text class="review-stars">
+                  <text wx:for="{{item.stars}}" wx:for-item="star" wx:for-index="i" wx:key="i">{{star ? '⭐' : '☆'}}</text>
+                </text>
+                <text class="review-date">{{item.date}}</text>
+              </view>
+            </view>
+          </view>
+          <text class="review-content">{{item.content}}</text>
+          <view class="review-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+            <text class="review-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="bottom-safe-area"></view>
+  </block>
+
+  <!-- 7. 底部固定操作栏 -->
+  <view class="bottom-action-bar">
+    <view class="action-info">
+      <text class="action-price-label">合计</text>
+      <text class="action-price-symbol">¥</text>
+      <text class="action-price" wx:if="{{activePricingTab === 'single'}}">{{service.price}}</text>
+      <text class="action-price" wx:if="{{activePricingTab === 'package'}}">{{selectedPackage.price}}</text>
+    </view>
+    <view class="action-btn" bindtap="handleBookTap">
+      <text>{{activePricingTab === 'single' ? '立即预约' : '立即购买套餐'}}</text>
+    </view>
+  </view>
+</view>

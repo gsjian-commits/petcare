@@ -1,0 +1,187 @@
+<view class="page-pet-edit">
+  <!-- 头像上传 -->
+  <view class="avatar-section" bindtap="handleAvatarTap">
+    <view class="avatar-wrap" style="background-color: {{form.avatarBg}}">
+      <text class="avatar-icon" wx:if="{{form.avatar}}">{{form.avatar}}</text>
+      <text class="avatar-placeholder" wx:else>🐾</text>
+    </view>
+    <text class="avatar-tip">点击更换头像</text>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="form-section">
+    <view class="form-title">基本信息</view>
+
+    <view class="form-row">
+      <text class="form-label">宠物名</text>
+      <input class="form-input" placeholder="请输入宠物名" value="{{form.name}}" maxlength="10" bindinput="handleInput" data-field="name" />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">宠物类型</text>
+      <view class="form-options">
+        <view
+          class="form-option {{form.type === 'cat' ? 'form-option-active' : ''}}"
+          data-value="cat"
+          bindtap="handleTypeSelect"
+        >
+          <text class="form-option-icon">🐱</text>
+          <text>猫咪</text>
+        </view>
+        <view
+          class="form-option {{form.type === 'dog' ? 'form-option-active' : ''}}"
+          data-value="dog"
+          bindtap="handleTypeSelect"
+        >
+          <text class="form-option-icon">🐶</text>
+          <text>狗狗</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">品种</text>
+      <view class="form-input-wrap" bindtap="handleBreedTap">
+        <text class="form-input-text {{form.breed ? '' : 'form-input-placeholder'}}">{{form.breed || '请选择品种'}}</text>
+        <text class="form-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">性别</text>
+      <view class="form-options">
+        <view
+          class="form-option {{form.gender === 'male' ? 'form-option-active' : ''}}"
+          data-value="male"
+          bindtap="handleGenderSelect"
+        >
+          <text>♂ 男孩</text>
+        </view>
+        <view
+          class="form-option {{form.gender === 'female' ? 'form-option-active' : ''}}"
+          data-value="female"
+          bindtap="handleGenderSelect"
+        >
+          <text>♀ 女孩</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-row form-row-half">
+      <view class="form-half">
+        <text class="form-label">年龄（岁）</text>
+        <input class="form-input" placeholder="如 2.5" value="{{form.age}}" type="digit" bindinput="handleInput" data-field="age" />
+      </view>
+      <view class="form-half">
+        <text class="form-label">体重（kg）</text>
+        <input class="form-input" placeholder="如 5.0" value="{{form.weight}}" type="digit" bindinput="handleInput" data-field="weight" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 健康状况 -->
+  <view class="form-section">
+    <view class="form-title">健康状况</view>
+
+    <view class="form-row">
+      <text class="form-label">疫苗齐全</text>
+      <switch
+        class="form-switch"
+        color="#FF6B35"
+        checked="{{form.vaccinated}}"
+        bindchange="handleVaccinatedChange"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">过敏史</text>
+      <input class="form-input" placeholder="无过敏史可留空" value="{{form.allergiesText}}" maxlength="50" bindinput="handleInput" data-field="allergiesText" />
+    </view>
+
+    <view class="form-row form-last">
+      <text class="form-label">性格特征</text>
+      <view class="form-tags">
+        <view
+          class="form-tag {{form.personality.indexOf('温顺') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="温顺"
+          bindtap="handlePersonalityTag"
+        >
+          <text>😊 温顺</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('活泼') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="活泼"
+          bindtap="handlePersonalityTag"
+        >
+          <text>⚡ 活泼</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('胆小') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="胆小"
+          bindtap="handlePersonalityTag"
+        >
+          <text>😰 胆小</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('粘人') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="粘人"
+          bindtap="handlePersonalityTag"
+        >
+          <text>💕 粘人</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('独立') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="独立"
+          bindtap="handlePersonalityTag"
+        >
+          <text>🏠 独立</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('好动') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="好动"
+          bindtap="handlePersonalityTag"
+        >
+          <text>🎾 好动</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('安静') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="安静"
+          bindtap="handlePersonalityTag"
+        >
+          <text>📖 安静</text>
+        </view>
+        <view
+          class="form-tag {{form.personality.indexOf('高冷') !== -1 ? 'form-tag-active' : ''}}"
+          data-tag="高冷"
+          bindtap="handlePersonalityTag"
+        >
+          <text>❄️ 高冷</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 注意事项 -->
+  <view class="form-section">
+    <view class="form-title">注意事项</view>
+    <textarea
+      class="form-textarea"
+      placeholder="如：怕吹风机、有攻击性、需要穿纸尿裤等"
+      value="{{form.notes}}"
+      maxlength="200"
+      bindinput="handleInput"
+      data-field="notes"
+    ></textarea>
+    <text class="form-counter">{{form.notes.length}}/200</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <view class="btn-save" bindtap="handleSave">
+      <text>{{isEdit ? '保存修改' : '添加宠物'}}</text>
+    </view>
+    <view class="btn-delete" wx:if="{{isEdit}}" bindtap="handleDelete">
+      <text>删除宠物</text>
+    </view>
+  </view>
+</view>

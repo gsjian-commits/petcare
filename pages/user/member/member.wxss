@@ -1,0 +1,428 @@
+.page-member {
+  min-height: 100vh;
+  background-color: var(--color-bg-page);
+  padding-bottom: 40rpx;
+}
+
+.section-header {
+  padding: 32rpx 24rpx 16rpx;
+}
+
+.section-title {
+  font-size: var(--font-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+/* 会员卡片 */
+.member-card {
+  margin: 24rpx 24rpx 0;
+  border-radius: var(--radius-lg);
+  padding: 32rpx 28rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.member-card-deco {
+  position: absolute;
+  font-size: 80rpx;
+  opacity: 0.1;
+  color: #FFFFFF;
+}
+
+.deco-1 {
+  top: -20rpx;
+  right: 20rpx;
+}
+
+.deco-2 {
+  bottom: 40rpx;
+  right: 80rpx;
+  font-size: 48rpx;
+}
+
+.deco-3 {
+  top: 60rpx;
+  left: -10rpx;
+  font-size: 56rpx;
+}
+
+.member-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.member-card-level {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.member-card-icon {
+  font-size: 48rpx;
+}
+
+.member-card-name {
+  font-size: var(--font-xxl);
+  font-weight: var(--weight-bold);
+  color: #FFFFFF;
+}
+
+.member-card-valid {
+  font-size: var(--font-xs);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.member-card-body {
+  margin-bottom: 20rpx;
+}
+
+.member-card-count {
+  display: flex;
+  align-items: baseline;
+}
+
+.count-num {
+  font-size: 72rpx;
+  font-weight: var(--weight-bold);
+  color: #FFFFFF;
+  line-height: 1.1;
+}
+
+.count-unit {
+  font-size: var(--font-md);
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 8rpx;
+}
+
+.count-label {
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4rpx;
+}
+
+.member-card-progress {
+  margin-top: 16rpx;
+}
+
+.progress-bar {
+  height: 8rpx;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 4rpx;
+  transition: width var(--transition-normal);
+}
+
+.progress-text {
+  font-size: var(--font-xs);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 会员权益 */
+.benefits-section {
+  background: var(--color-bg-card);
+  margin: 24rpx 24rpx 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rpx;
+  padding: 0 24rpx 24rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
+}
+
+.benefit-icon {
+  font-size: 32rpx;
+}
+
+.benefit-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+/* 等级体系 */
+.levels-section {
+  background: var(--color-bg-card);
+  margin: 24rpx 24rpx 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.levels-list {
+  padding: 0 24rpx 24rpx;
+}
+
+.level-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-divider);
+}
+
+.level-item:last-child {
+  border-bottom: none;
+}
+
+.level-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-icon {
+  font-size: 36rpx;
+}
+
+.level-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.level-name {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.level-discount {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.level-condition {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+}
+
+.condition-label {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.condition-value {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+/* 购买记录 */
+.history-section {
+  background: var(--color-bg-card);
+  margin: 24rpx 24rpx 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.history-list {
+  padding: 0 24rpx 24rpx;
+}
+
+.history-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--color-divider);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.history-name {
+  font-size: var(--font-md);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.history-price {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+.history-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history-date {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.history-status {
+  font-size: var(--font-xs);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.status-active {
+  color: var(--color-success);
+  background: #E8F8F0;
+}
+
+.status-expired {
+  color: var(--text-hint);
+  background: var(--color-divider);
+}
+
+.history-empty {
+  text-align: center;
+  padding: 32rpx 0;
+}
+
+.empty-text {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+/* 推荐套餐 */
+.packages-section {
+  background: var(--color-bg-card);
+  margin: 24rpx 24rpx 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.packages-list {
+  padding: 0 24rpx 24rpx;
+}
+
+.package-card-item {
+  padding: 24rpx;
+  border: 2rpx solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 16rpx;
+  position: relative;
+}
+
+.package-card-item:last-child {
+  margin-bottom: 0;
+}
+
+.package-card-tag {
+  position: absolute;
+  top: 0;
+  right: 24rpx;
+  padding: 6rpx 20rpx;
+  border-radius: 0 0 12rpx 12rpx;
+}
+
+.tag-text {
+  font-size: var(--font-xs);
+  color: #FFFFFF;
+  font-weight: var(--weight-medium);
+}
+
+.package-card-name {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.package-card-desc {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.package-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.package-card-feature {
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  padding: 4rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+.package-card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.package-card-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.price-value {
+  font-size: var(--font-xxl);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+}
+
+.price-period {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+.price-original {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  text-decoration: line-through;
+}
+
+/* 底部安全区 */
+.bottom-safe-area {
+  height: 40rpx;
+}

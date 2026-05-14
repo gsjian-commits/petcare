@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "app-banner": "/components/banner/banner",
+    "service-grid": "/components/service-grid/service-grid",
+    "package-card": "/components/package-card/package-card",
+    "trust-bar": "/components/trust-bar/trust-bar",
+    "case-card": "/components/case-card/case-card"
+  }
+}

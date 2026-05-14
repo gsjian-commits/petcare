@@ -1,0 +1,134 @@
+<view class="page-report">
+  <!-- 加载 -->
+  <view class="loading-view" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 1. 报告头部 -->
+    <view class="report-header" style="background-color: {{report.serviceBg}}">
+      <text class="header-icon">{{report.serviceIcon}}</text>
+      <text class="header-title">{{report.serviceName}} · 服务报告</text>
+      <text class="header-date">{{report.serviceDate}}</text>
+    </view>
+
+    <!-- 2. 服务基本信息 -->
+    <view class="report-section">
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="info-item-label">宠物</text>
+          <text class="info-item-value">{{report.petName}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-item-label">服务时间</text>
+          <text class="info-item-value">{{report.serviceDate}} {{report.timeLabel}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-item-label">服务管家</text>
+          <view class="staff-info">
+            <text class="staff-avatar">{{report.staffAvatar}}</text>
+            <text class="staff-name">{{report.staffName}}</text>
+          </view>
+        </view>
+        <view class="info-item">
+          <text class="info-item-label">客户评价</text>
+          <view class="rating-stars">
+            <text class="star {{index < report.rating ? 'star-active' : ''}}" wx:for="{{[1,2,3,4,5]}}" wx:key="*this">★</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 3. 服务前照片 -->
+    <view class="report-section">
+      <view class="section-header">
+        <view class="section-header-left">
+          <text class="section-icon">📸</text>
+          <text class="section-title">服务前记录</text>
+        </view>
+      </view>
+      <view class="photo-grid">
+        <view class="photo-placeholder">
+          <text class="placeholder-icon">📷</text>
+          <text class="placeholder-text">服务前照片</text>
+        </view>
+        <view class="photo-placeholder">
+          <text class="placeholder-icon">📷</text>
+          <text class="placeholder-text">服务前照片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 4. 服务后照片 -->
+    <view class="report-section">
+      <view class="section-header">
+        <view class="section-header-left">
+          <text class="section-icon">✨</text>
+          <text class="section-title">服务后展示</text>
+        </view>
+      </view>
+      <view class="photo-grid">
+        <view class="photo-placeholder photo-after">
+          <text class="placeholder-icon">📸</text>
+          <text class="placeholder-text">服务后照片</text>
+        </view>
+        <view class="photo-placeholder photo-after">
+          <text class="placeholder-icon">📸</text>
+          <text class="placeholder-text">服务后照片</text>
+        </view>
+        <view class="photo-placeholder photo-after">
+          <text class="placeholder-icon">📸</text>
+          <text class="placeholder-text">服务后照片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 5. 服务评价标签 -->
+    <view class="report-section" wx:if="{{report.tags && report.tags.length > 0}}">
+      <view class="section-header">
+        <view class="section-header-left">
+          <text class="section-icon">🏷️</text>
+          <text class="section-title">服务标签</text>
+        </view>
+      </view>
+      <view class="tags-list">
+        <text class="tag-item" wx:for="{{report.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 6. 服务小结 -->
+    <view class="report-section">
+      <view class="section-header">
+        <view class="section-header-left">
+          <text class="section-icon">📝</text>
+          <text class="section-title">服务小结</text>
+        </view>
+      </view>
+      <text class="report-text">{{report.summary}}</text>
+    </view>
+
+    <!-- 7. 下次建议 -->
+    <view class="report-section">
+      <view class="section-header">
+        <view class="section-header-left">
+          <text class="section-icon">💡</text>
+          <text class="section-title">下次建议</text>
+        </view>
+      </view>
+      <text class="report-text report-suggestions">{{report.suggestions}}</text>
+    </view>
+
+    <!-- 8. 再次预约 -->
+    <view class="report-section">
+      <view class="rebook-area">
+        <text class="rebook-text">再次预约相同服务？</text>
+        <view class="rebook-btn" bindtap="handleRebook">
+          <text>再次预约</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="bottom-safe-area"></view>
+  </block>
+</view>

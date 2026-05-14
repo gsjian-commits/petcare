@@ -1,0 +1,15 @@
+<view class="service-grid">
+  <view
+    class="service-item"
+    wx:for="{{services}}"
+    wx:key="id"
+    data-id="{{item.id}}"
+    data-name="{{item.name}}"
+    bindtap="onTapService"
+  >
+    <view class="service-icon" style="background-color: {{item.bgColor}}">
+      <text class="service-emoji">{{item.icon}}</text>
+    </view>
+    <text class="service-name">{{item.name}}</text>
+  </view>
+</view>

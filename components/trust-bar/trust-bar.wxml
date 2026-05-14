@@ -1,0 +1,9 @@
+<view class="trust-bar">
+  <view class="trust-item" wx:for="{{items}}" wx:key="id">
+    <text class="trust-icon">{{item.icon}}</text>
+    <view class="trust-text">
+      <text class="trust-title">{{item.title}}</text>
+      <text class="trust-desc">{{item.desc}}</text>
+    </view>
+  </view>
+</view>

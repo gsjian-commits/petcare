@@ -1,0 +1,530 @@
+.page-detail {
+  min-height: 100vh;
+  background-color: var(--color-bg-page);
+  padding-bottom: 120rpx;
+}
+
+/* ===== 加载状态 ===== */
+.loading-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 0;
+}
+
+.loading-text {
+  font-size: var(--font-md);
+  color: var(--text-hint);
+}
+
+/* ===== 1. 头部区域 ===== */
+.detail-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 32rpx 48rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-back {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  z-index: 2;
+}
+
+.header-back-btn {
+  font-size: var(--font-md);
+  color: var(--text-inverse);
+  font-weight: var(--weight-medium);
+  padding: 12rpx 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.header-back-btn:active {
+  opacity: 0.7;
+}
+
+.header-icon {
+  font-size: 96rpx;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.header-name {
+  font-size: var(--font-xxl);
+  font-weight: var(--weight-bold);
+  color: var(--text-inverse);
+  margin-bottom: 12rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.header-rating {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.rating-star {
+  font-size: var(--font-sm);
+}
+
+.rating-value {
+  font-size: var(--font-lg);
+  color: var(--text-inverse);
+  font-weight: var(--weight-bold);
+  margin-left: 8rpx;
+}
+
+.rating-count {
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== 2. 价格区域（单次/套餐Tab切换） ===== */
+.price-section {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.pricing-tabs {
+  display: flex;
+  background: var(--color-bg-page);
+  border-bottom: 2rpx solid var(--color-divider);
+}
+
+.pricing-tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.pricing-tab-text {
+  font-size: var(--font-md);
+  color: var(--text-hint);
+  font-weight: var(--weight-medium);
+}
+
+.pricing-tab-active .pricing-tab-text {
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+}
+
+.pricing-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 4rpx;
+  background: var(--color-primary);
+  border-radius: 2rpx;
+}
+
+.pricing-body {
+  padding: 28rpx 28rpx 32rpx;
+}
+
+.single-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.single-price-row .price-label {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+.price-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+}
+
+.price-value-row .price-symbol {
+  font-size: var(--font-md);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+}
+
+.price-value-row .price-current {
+  font-size: var(--font-hero);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.price-value-row .price-original {
+  font-size: var(--font-sm);
+  color: var(--text-placeholder);
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+
+.price-unit {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+.price-features {
+  display: flex;
+  gap: 16rpx;
+  flex-wrap: wrap;
+}
+
+.price-feature {
+  font-size: 20rpx;
+  color: var(--color-accent);
+  background: rgba(78, 205, 196, 0.1);
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+/* 套餐选项 */
+.package-list-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.package-pricing-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  border-radius: var(--radius-md);
+  border: 2rpx solid var(--color-border);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.package-pricing-card:active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.package-pricing-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+
+.package-pricing-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.package-pricing-name {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.package-pricing-desc {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.package-pricing-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+}
+
+.package-pricing-total {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+}
+
+.package-pricing-avg {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.package-pricing-save {
+  font-size: 20rpx;
+  color: var(--color-danger);
+  font-weight: var(--weight-medium);
+}
+
+/* ===== 通用区块 ===== */
+.detail-section {
+  background: var(--color-bg-card);
+  margin: 20rpx 24rpx;
+  padding: 28rpx 28rpx 32rpx;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.section-title-icon {
+  font-size: var(--font-md);
+  margin-right: 8rpx;
+}
+
+.section-count {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  margin-left: auto;
+}
+
+/* ===== 3. 服务流程 ===== */
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.step-number {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: var(--radius-round);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--text-inverse);
+  font-size: var(--font-sm);
+  font-weight: var(--weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+  background: var(--color-bg-page);
+  padding: 16rpx 20rpx;
+  border-radius: var(--radius-md);
+}
+
+.step-title {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.step-desc {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: block;
+}
+
+/* ===== 4. 服务介绍 ===== */
+.intro-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.intro-desc {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.intro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.intro-tag {
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-weight: var(--weight-medium);
+}
+
+/* ===== 5. 温馨提示 ===== */
+.notice-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  background: #FFF8F0;
+  padding: 20rpx;
+  border-radius: var(--radius-md);
+  border-left: 6rpx solid var(--color-warning);
+}
+
+.notice-text {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== 6. 用户评价 ===== */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.review-item {
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid var(--color-divider);
+}
+
+.review-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.review-user {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.review-avatar {
+  font-size: 48rpx;
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.review-username {
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.review-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.review-stars {
+  font-size: var(--font-xs);
+}
+
+.review-date {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.review-content {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.review-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.review-tag {
+  font-size: 20rpx;
+  color: var(--color-accent);
+  background: rgba(78, 205, 196, 0.1);
+  padding: 4rpx 14rpx;
+  border-radius: 12rpx;
+}
+
+/* ===== 7. 底部固定操作栏 ===== */
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg-card);
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+.action-info {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+}
+
+.action-price-label {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin-right: 4rpx;
+}
+
+.action-price-symbol {
+  font-size: var(--font-md);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+}
+
+.action-price {
+  font-size: var(--font-xxl);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--text-inverse);
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+  padding: 20rpx 60rpx;
+  border-radius: 44rpx;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.action-btn:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
+/* ===== 底部安全区域 ===== */
+.bottom-safe-area {
+  height: 40rpx;
+}

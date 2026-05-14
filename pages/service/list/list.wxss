@@ -1,0 +1,264 @@
+.page-list {
+  min-height: 100vh;
+  background-color: var(--color-bg-page);
+}
+
+.category-tabs {
+  background: var(--color-bg-card);
+  padding: 20rpx 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tabs-scroll {
+  width: 100%;
+}
+
+.tabs-row {
+  display: flex;
+  gap: 8rpx;
+  padding: 0 16rpx;
+  white-space: nowrap;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 20rpx 16rpx;
+  position: relative;
+  min-width: 120rpx;
+  transition: transform 0.15s ease;
+}
+
+.tab-item:active {
+  transform: scale(0.95);
+}
+
+.tab-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+
+.tab-name {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  white-space: nowrap;
+}
+
+.tab-active .tab-name {
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 6rpx;
+  background: var(--color-primary);
+  border-radius: 3rpx;
+}
+
+.service-count {
+  padding: 20rpx 24rpx 8rpx;
+}
+
+.service-count text {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+
+.service-list {
+  padding: 0 24rpx;
+}
+
+.service-card {
+  display: flex;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease;
+}
+
+.service-card:active {
+  transform: scale(0.98);
+}
+
+.card-image {
+  width: 180rpx;
+  min-height: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-image-icon {
+  font-size: 72rpx;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  padding: 20rpx 20rpx 20rpx 16rpx;
+  justify-content: space-between;
+}
+
+.card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  overflow: hidden;
+}
+
+.card-name {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-desc {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.card-meta {
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.meta-icon {
+  font-size: var(--font-sm);
+}
+
+.meta-text {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-weight: var(--weight-medium);
+}
+
+.meta-count {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.card-tag {
+  font-size: 18rpx;
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.card-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 6rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+}
+
+.price-value {
+  font-size: var(--font-xxl);
+  color: var(--color-primary);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.price-unit {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+.price-original {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+  text-decoration: line-through;
+}
+
+.btn-book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: var(--font-xs);
+  font-weight: var(--weight-semibold);
+  padding: 10rpx 28rpx;
+  border-radius: 28rpx;
+  margin-top: 4rpx;
+  transition: opacity 0.15s ease;
+}
+
+.btn-book:active {
+  opacity: 0.8;
+}
+
+.empty-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  gap: 16rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+}
+
+.empty-text {
+  font-size: var(--font-md);
+  color: var(--text-hint);
+}
+
+.bottom-safe {
+  height: 40rpx;
+}

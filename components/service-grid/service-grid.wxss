@@ -1,0 +1,47 @@
+/* ===== 服务分类宫格组件 ===== */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+  padding: 24rpx 20rpx;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 8rpx;
+  transition: transform 0.15s ease;
+}
+
+.service-item:active {
+  transform: scale(0.92);
+}
+
+.service-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease;
+}
+
+.service-item:active .service-icon {
+  box-shadow: var(--shadow-md);
+}
+
+.service-emoji {
+  font-size: 44rpx;
+  display: block;
+}
+
+.service-name {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  font-weight: var(--weight-medium);
+  text-align: center;
+}

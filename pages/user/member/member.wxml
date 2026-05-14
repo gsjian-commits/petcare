@@ -1,0 +1,125 @@
+<view class="page-member">
+  <!-- 1. 会员卡片 -->
+  <view class="member-card" style="background: linear-gradient(135deg, {{memberInfo.color}} 0%, {{memberInfo.color}}CC 100%)">
+    <view class="member-card-bg">
+      <text class="member-card-deco deco-1">✦</text>
+      <text class="member-card-deco deco-2">✦</text>
+      <text class="member-card-deco deco-3">✦</text>
+    </view>
+    <view class="member-card-header">
+      <view class="member-card-level">
+        <text class="member-card-icon">{{memberInfo.icon}}</text>
+        <text class="member-card-name">{{memberInfo.level}}</text>
+      </view>
+      <text class="member-card-valid">有效期至 {{memberInfo.validUntil}}</text>
+    </view>
+    <view class="member-card-body">
+      <view class="member-card-count">
+        <text class="count-num">{{memberInfo.remainingCount}}</text>
+        <text class="count-unit">/{{memberInfo.totalCount}} 次</text>
+      </view>
+      <text class="count-label">剩余服务次数</text>
+    </view>
+    <view class="member-card-progress">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{memberInfo.progress.current / memberInfo.progress.target * 100}}%"></view>
+      </view>
+      <text class="progress-text">{{memberInfo.progress.label}}</text>
+    </view>
+  </view>
+
+  <!-- 2. 会员权益 -->
+  <view class="benefits-section">
+    <view class="section-header">
+      <text class="section-title">会员权益</text>
+    </view>
+    <view class="benefits-grid">
+      <view class="benefit-item" wx:for="{{memberInfo.benefits}}" wx:key="*this">
+        <text class="benefit-icon">{{item.icon}}</text>
+        <text class="benefit-text">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 等级体系 -->
+  <view class="levels-section">
+    <view class="section-header">
+      <text class="section-title">等级说明</text>
+    </view>
+    <view class="levels-list">
+      <view class="level-item" wx:for="{{memberLevels}}" wx:key="name">
+        <view class="level-icon-wrap" style="background-color: {{item.color}}22">
+          <text class="level-icon">{{item.icon}}</text>
+        </view>
+        <view class="level-info">
+          <text class="level-name">{{item.name}}</text>
+          <text class="level-discount">享{{Math.round((1 - item.discount) * 100)}}折优惠</text>
+        </view>
+        <view class="level-condition">
+          <text class="condition-label">累计消费</text>
+          <text class="condition-value">¥{{item.minAmount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 购买记录 -->
+  <view class="history-section">
+    <view class="section-header">
+      <text class="section-title">购买记录</text>
+    </view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{purchaseHistory}}" wx:key="id">
+        <view class="history-top">
+          <text class="history-name">{{item.packageName}}</text>
+          <text class="history-price">¥{{item.price}}</text>
+        </view>
+        <view class="history-bottom">
+          <text class="history-date">购买于 {{item.purchaseDate}}</text>
+          <text class="history-status {{item.status === 'active' ? 'status-active' : 'status-expired'}}">
+            {{item.status === 'active' ? '使用中' : '已过期'}}
+          </text>
+        </view>
+      </view>
+      <view class="history-empty" wx:if="{{purchaseHistory.length === 0}}">
+        <text class="empty-text">暂无购买记录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5. 推荐套餐 -->
+  <view class="packages-section">
+    <view class="section-header">
+      <text class="section-title">推荐套餐</text>
+    </view>
+    <view class="packages-list">
+      <view
+        class="package-card-item"
+        wx:for="{{memberPackages}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onPackageTap"
+      >
+        <view class="package-card-tag" style="background-color: {{item.tagColor}}">
+          <text class="tag-text">{{item.tag}}</text>
+        </view>
+        <text class="package-card-name">{{item.name}}</text>
+        <text class="package-card-desc">{{item.desc}}</text>
+        <view class="package-card-features">
+          <text class="package-card-feature" wx:for="{{item.features}}" wx:key="*this">✓ {{item}}</text>
+        </view>
+        <view class="package-card-price-row">
+          <view class="package-card-price">
+            <text class="price-symbol">¥</text>
+            <text class="price-value">{{item.price}}</text>
+            <text class="price-period">/{{item.period}}</text>
+          </view>
+          <text class="price-original" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe-area"></view>
+</view>
