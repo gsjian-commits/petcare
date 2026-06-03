@@ -19,6 +19,6 @@ Page({
 
   onPackageTap(e) {
     const { id } = e.currentTarget.dataset;
-    wx.navigateTo({ url: `/pages/package/detail?id=${id}` });
+    wx.navigateTo({ url: `/pages/package/detail/detail?id=${id}` });
   }
 });

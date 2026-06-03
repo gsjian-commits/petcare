@@ -76,7 +76,7 @@ Page({
   handleGoService(e) {
     const { id } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/service/detail?id=${id}`
+      url: `/pages/service/detail/detail?id=${id}`
     });
   },
 

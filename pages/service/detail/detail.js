@@ -105,7 +105,7 @@ Page({
     const app = getApp();
     app.globalData.selectedServiceId = this.data.service.id;
     wx.switchTab({
-      url: '/pages/order/create'
+      url: '/pages/order/create/create'
     });
   },
 

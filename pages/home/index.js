@@ -74,27 +74,27 @@ Page({
   },
 
   onBannerCTA(e) {
-    wx.switchTab({ url: '/pages/order/create' });
+    wx.switchTab({ url: '/pages/order/create/create' });
   },
 
   onServiceSelect(e) {
     const { id, name } = e.detail;
     wx.navigateTo({
-      url: `/pages/service/detail?id=${id}&name=${name}`
+      url: `/pages/service/detail/detail?id=${id}&name=${name}`
     });
   },
 
   onPackageSelect(e) {
     const { id } = e.detail;
     wx.navigateTo({
-      url: `/pages/package/detail?id=${id}`
+      url: `/pages/package/detail/detail?id=${id}`
     });
   },
 
   onCaseSelect(e) {
     const { id } = e.detail;
     wx.navigateTo({
-      url: `/pages/case/detail?id=${id}`
+      url: `/pages/case/detail/detail?id=${id}`
     });
   },
 

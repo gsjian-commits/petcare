@@ -46,13 +46,13 @@ Page({
   },
 
   handleRebook() {
-    wx.switchTab({ url: '/pages/order/create' });
+    wx.switchTab({ url: '/pages/order/create/create' });
   },
 
   handleViewReport() {
     const order = this.data.order;
     if (order && order.reportId) {
-      wx.navigateTo({ url: `/pages/report/detail?id=${order.reportId}` });
+      wx.navigateTo({ url: `/pages/report/detail/detail?id=${order.reportId}` });
     }
   },
 

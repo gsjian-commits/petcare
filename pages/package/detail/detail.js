@@ -68,7 +68,7 @@ Page({
 
   handleBuy() {
     wx.navigateTo({
-      url: `/pages/order/create?packageId=${this.data.pkg.id}`
+      url: `/pages/order/create/create?packageId=${this.data.pkg.id}`
     });
   },
 

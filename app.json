@@ -2,18 +2,18 @@
   "pages": [
     "pages/home/index",
     "pages/service/list/list",
-    "pages/service/detail",
-    "pages/order/create",
-    "pages/order/detail",
-    "pages/report/detail",
-    "pages/pet/list",
-    "pages/pet/edit",
-    "pages/user/index",
-    "pages/user/orders",
-    "pages/user/member",
-    "pages/user/coupons",
-    "pages/case/detail",
-    "pages/package/detail"
+    "pages/service/detail/detail",
+    "pages/order/create/create",
+    "pages/order/detail/detail",
+    "pages/report/detail/detail",
+    "pages/pet/list/list",
+    "pages/pet/edit/edit",
+    "pages/user/index/index",
+    "pages/user/orders/orders",
+    "pages/user/member/member",
+    "pages/user/coupons/coupons",
+    "pages/case/detail/detail",
+    "pages/package/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,11 +37,11 @@
         "text": "📋  服务"
       },
       {
-        "pagePath": "pages/order/create",
+        "pagePath": "pages/order/create/create",
         "text": "📅  预约"
       },
       {
-        "pagePath": "pages/user/index",
+        "pagePath": "pages/user/index/index",
         "text": "👤  我的"
       }
     ]

@@ -32,7 +32,7 @@ Page({
 
   onOrderTap(e) {
     const { id } = e.currentTarget.dataset;
-    wx.navigateTo({ url: `/pages/order/detail?id=${id}` });
+    wx.navigateTo({ url: `/pages/order/detail/detail?id=${id}` });
   },
 
   onActionTap(e) {
@@ -61,13 +61,13 @@ Page({
         break;
       case 'review':
         if (order && order.hasReport) {
-          wx.navigateTo({ url: `/pages/report/detail?id=${order.reportId}` });
+          wx.navigateTo({ url: `/pages/report/detail/detail?id=${order.reportId}` });
         } else {
           wx.showToast({ title: '评价功能开发中', icon: 'none' });
         }
         break;
       case 'rebook':
-        wx.switchTab({ url: '/pages/order/create' });
+        wx.switchTab({ url: '/pages/order/create/create' });
         break;
     }
   },

@@ -26,6 +26,6 @@ Page({
   },
 
   handleRebook() {
-    wx.switchTab({ url: '/pages/order/create' });
+    wx.switchTab({ url: '/pages/order/create/create' });
   }
 });

@@ -13,13 +13,13 @@ Page({
   handlePetTap(e) {
     const { id } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/pet/edit?id=${id}`
+      url: `/pages/pet/edit/edit?id=${id}`
     });
   },
 
   handleAddPet() {
     wx.navigateTo({
-      url: '/pages/pet/edit'
+      url: '/pages/pet/edit/edit'
     });
   }
 });

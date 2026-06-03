@@ -64,7 +64,7 @@ Page({
 
   handleAddPet() {
     wx.navigateTo({
-      url: '/pages/pet/edit'
+      url: '/pages/pet/edit/edit'
     });
   },
 
@@ -156,7 +156,7 @@ Page({
         confirmText: '去登录',
         success: (res) => {
           if (res.confirm) {
-            wx.switchTab({ url: '/pages/user/index' });
+            wx.switchTab({ url: '/pages/user/index/index' });
           }
         }
       });
@@ -187,7 +187,7 @@ Page({
         cancelText: '返回首页',
         success: (res) => {
           if (res.confirm) {
-            wx.navigateTo({ url: '/pages/user/orders' });
+            wx.navigateTo({ url: '/pages/user/orders/orders' });
           } else {
             wx.switchTab({ url: '/pages/home/index' });
           }

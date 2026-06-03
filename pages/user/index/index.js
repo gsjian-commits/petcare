@@ -11,23 +11,23 @@ Page({
   },
 
   goOrders() {
-    wx.navigateTo({ url: '/pages/user/orders' });
+    wx.navigateTo({ url: '/pages/user/orders/orders' });
   },
 
   goMember() {
-    wx.navigateTo({ url: '/pages/user/member' });
+    wx.navigateTo({ url: '/pages/user/member/member' });
   },
 
   goPets() {
-    wx.navigateTo({ url: '/pages/pet/list' });
+    wx.navigateTo({ url: '/pages/pet/list/list' });
   },
 
   goReports() {
-    wx.navigateTo({ url: '/pages/user/orders?report=1' });
+    wx.navigateTo({ url: '/pages/user/orders/orders?report=1' });
   },
 
   goCoupons() {
-    wx.navigateTo({ url: '/pages/user/coupons' });
+    wx.navigateTo({ url: '/pages/user/coupons/coupons' });
   },
 
   goAddresses() {
