@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/service/list",
+    "pages/service/list/list",
     "pages/service/detail",
     "pages/order/create",
     "pages/order/detail",
@@ -33,7 +33,7 @@
         "text": "🏠  首页"
       },
       {
-        "pagePath": "pages/service/list",
+        "pagePath": "pages/service/list/list",
         "text": "📋  服务"
       },
       {
