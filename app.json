@@ -13,12 +13,13 @@
     "pages/user/member/member",
     "pages/user/coupons/coupons",
     "pages/case/detail/detail",
-    "pages/package/detail/detail"
+    "pages/package/detail/detail",
+    "pages/admin/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FF6B35",
-    "navigationBarTitleText": "宠管家",
+    "navigationBarTitleText": "灵宠无忧",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#F8F8F8"
   },

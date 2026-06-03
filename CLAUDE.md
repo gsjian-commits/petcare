@@ -58,7 +58,7 @@ petcare/
 ## 页面路由
 | 页面 | 路由 | 标题 |
 |------|------|------|
-| 首页 | /pages/home/index | 宠管家·上门宠物服务 |
+| 首页 | /pages/home/index | 灵宠无忧·上门宠物服务 |
 | 服务详情 | /pages/service/detail?id=xxx | [服务名称] |
 | 预约下单 | /pages/order/create | 确认预约 |
 | 订单详情 | /pages/order/detail?id=xxx | 订单详情 |
@@ -81,7 +81,7 @@ petcare/
 - 所有文本内容优先使用占位符，后期替换为真实数据
 
 ## 品牌信息
-- 品牌名：宠管家
+- 品牌名：灵宠无忧
 - Slogan：宠物家庭管家
 - 副标题：天津全场景宠物到家服务
 - 核心卖点：全程录像、保险兜底、不满意退款、持证上岗
@@ -126,7 +126,7 @@ petcare/
 ### 页面路由（14页面全部注册在 app.json）
 | 页面 | 路由 | 标题 |
 |------|------|------|
-| 首页 | /pages/home/index | 宠管家·上门宠物服务 |
+| 首页 | /pages/home/index | 灵宠无忧·上门宠物服务 |
 | 服务列表 | /pages/service/list | 上门服务 |
 | 服务详情 | /pages/service/detail?id=xxx | [服务名称] |
 | 预约下单 | /pages/order/create | 确认预约 |

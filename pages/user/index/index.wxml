@@ -97,6 +97,11 @@
     </view>
   </view>
 
+  <!-- 版本号 / 管理员入口 -->
+  <view class="version-text" bindtap="onVersionTap">
+    <text>v1.0.0</text>
+  </view>
+
   <!-- 底部安全区 -->
   <view class="bottom-safe-area"></view>
 </view>

@@ -3,7 +3,7 @@
   <view class="brand-header" style="padding-top: {{statusBarHeight + 12}}px">
     <view class="brand-logo">
       <text class="logo-icon">🐾</text>
-      <text class="logo-text">宠管家</text>
+      <text class="logo-text">灵宠无忧</text>
     </view>
     <view class="brand-location" bindtap="onTapLocation">
       <text class="location-icon">📍</text>

@@ -2,12 +2,27 @@ const mock = require('../../../utils/mock');
 
 Page({
   data: {
-    userInfo: {}
+    userInfo: {},
+    adminTapCount: 0
   },
 
   onShow() {
     const userInfo = mock.getUserInfo();
     this.setData({ userInfo });
+  },
+
+  onVersionTap() {
+    const count = this.data.adminTapCount + 1;
+    this.setData({ adminTapCount: count });
+    if (count >= 5) {
+      this.setData({ adminTapCount: 0 });
+      wx.navigateTo({ url: '/pages/admin/index/index' });
+    }
+    setTimeout(() => {
+      if (this.data.adminTapCount > 0) {
+        this.setData({ adminTapCount: 0 });
+      }
+    }, 3000);
   },
 
   goOrders() {

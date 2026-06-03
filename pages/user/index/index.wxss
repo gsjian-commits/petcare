@@ -197,6 +197,14 @@
   color: var(--text-placeholder);
 }
 
+/* 版本号 */
+.version-text {
+  text-align: center;
+  padding: 32rpx 0 16rpx;
+  font-size: 22rpx;
+  color: #CCCCCC;
+}
+
 /* 底部安全区 */
 .bottom-safe-area {
   height: 40rpx;
