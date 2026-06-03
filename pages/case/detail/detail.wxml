@@ -1,0 +1,96 @@
+<view class="page-case-detail">
+  <!-- 1. 头部区域 -->
+  <view class="case-header" style="background-color: {{caseInfo.bgColor || '#FF6B35'}}">
+    <view class="header-back">
+      <text class="header-back-btn" bindtap="handleBack">← 返回</text>
+    </view>
+    <text class="header-avatar">{{caseInfo.avatar || '🐾'}}</text>
+    <text class="header-title">{{caseInfo.title}}</text>
+    <view class="header-tags">
+      <text class="header-tag" wx:for="{{caseInfo.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 2. 服务流程步骤 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title">服务流程</text>
+    </view>
+    <view class="process-timeline">
+      <view class="process-item" wx:for="{{process}}" wx:key="step">
+        <view class="process-dot-wrap">
+          <view class="process-dot">{{item.step}}</view>
+          <view class="process-line" wx:if="{{index < process.length - 1}}"></view>
+        </view>
+        <view class="process-content">
+          <text class="process-title">{{item.title}}</text>
+          <text class="process-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 详情段落 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title">服务详情</text>
+    </view>
+    <view class="detail-paragraphs">
+      <text class="detail-paragraph" wx:for="{{details}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 4. 亮点 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title">服务亮点</text>
+    </view>
+    <view class="highlights-list">
+      <view class="highlight-item" wx:for="{{highlights}}" wx:key="*this">
+        <text class="highlight-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5. 评价 -->
+  <view class="detail-section" wx:if="{{review}}">
+    <view class="section-header">
+      <text class="section-title">主人评价</text>
+    </view>
+    <view class="review-body">
+      <view class="review-user">
+        <text class="review-avatar">{{review.avatar}}</text>
+        <view class="review-info">
+          <text class="review-name">{{review.userName}}</text>
+          <view class="review-stars">
+            <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">{{item <= review.rating ? '⭐' : '☆'}}</text>
+          </view>
+        </view>
+      </view>
+      <text class="review-content">{{review.content}}</text>
+    </view>
+  </view>
+
+  <!-- 6. 相关服务 -->
+  <view class="detail-section" wx:if="{{relatedServices.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">相关服务</text>
+    </view>
+    <view class="related-list">
+      <view
+        class="related-item"
+        wx:for="{{relatedServices}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="handleGoService"
+      >
+        <text class="related-icon" style="color: {{item.color}}">{{item.icon}}</text>
+        <text class="related-name">{{item.name}}</text>
+        <text class="related-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe-area"></view>
+</view>

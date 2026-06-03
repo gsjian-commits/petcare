@@ -1,0 +1,106 @@
+<view class="page-package-detail">
+  <!-- 1. Hero 卡片 -->
+  <view class="package-hero" style="background: linear-gradient(135deg, {{pkg.tagColor || '#FF6B35'}} 0%, {{pkg.tagColor || '#FF6B35'}}CC 100%)">
+    <view class="hero-back">
+      <text class="hero-back-btn" bindtap="handleBack">← 返回</text>
+    </view>
+    <view class="hero-deco">
+      <text class="hero-deco-text deco-1">✦</text>
+      <text class="hero-deco-text deco-2">✦</text>
+    </view>
+    <view class="hero-tag" wx:if="{{pkg.tag}}">
+      <text class="hero-tag-text">{{pkg.tag}}</text>
+    </view>
+    <text class="hero-name">{{pkg.name}}</text>
+    <text class="hero-desc">{{pkg.desc}}</text>
+    <view class="hero-price-row">
+      <view class="hero-price">
+        <text class="hero-price-symbol">¥</text>
+        <text class="hero-price-value">{{pkg.price}}</text>
+        <text class="hero-price-period">/{{pkg.period}}</text>
+      </view>
+      <text class="hero-price-original" wx:if="{{pkg.originalPrice > pkg.price}}">¥{{pkg.originalPrice}}</text>
+    </view>
+  </view>
+
+  <!-- 2. 特性网格 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title">套餐特色</text>
+    </view>
+    <view class="features-grid">
+      <view class="feature-item" wx:for="{{features}}" wx:key="*this">
+        <view class="feature-icon-wrap">
+          <text class="feature-icon">{{item.icon}}</text>
+        </view>
+        <text class="feature-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 服务清单 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title">服务内容</text>
+    </view>
+    <view class="checklist">
+      <view class="checklist-item" wx:for="{{pkg.features}}" wx:key="*this">
+        <text class="checklist-icon">✓</text>
+        <text class="checklist-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 4. 购买须知 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title-icon">📋</text>
+      <text class="section-title">购买须知</text>
+    </view>
+    <view class="notes-list">
+      <view class="notes-item" wx:for="{{purchaseNotes}}" wx:key="*this">
+        <text class="notes-dot">•</text>
+        <text class="notes-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5. FAQ 手风琴 -->
+  <view class="detail-section">
+    <view class="section-header">
+      <text class="section-title-icon">❓</text>
+      <text class="section-title">常见问题</text>
+    </view>
+    <view class="faq-list">
+      <view class="faq-item" wx:for="{{faq}}" wx:key="index">
+        <view
+          class="faq-question"
+          data-index="{{index}}"
+          bindtap="toggleFaq"
+        >
+          <text class="faq-q-text">{{item.question}}</text>
+          <text class="faq-arrow {{faqOpenIndex === index ? 'faq-arrow-open' : ''}}">›</text>
+        </view>
+        <view class="faq-answer {{faqOpenIndex === index ? 'faq-answer-open' : ''}}">
+          <text class="faq-a-text">{{item.answer}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe-area"></view>
+
+  <!-- 6. 底部固定操作栏 -->
+  <view class="bottom-action-bar">
+    <view class="action-price-row">
+      <text class="action-price-label">套餐价</text>
+      <text class="action-price-symbol">¥</text>
+      <text class="action-price-value">{{pkg.price}}</text>
+      <text class="action-price-period">/{{pkg.period}}</text>
+    </view>
+    <view class="action-btn" bindtap="handleBuy">
+      <text>立即购买</text>
+    </view>
+  </view>
+</view>
