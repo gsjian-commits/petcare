@@ -16,19 +16,26 @@ Page({
 
   onLoad() {
     const app = getApp();
-    this.setData({
-      statusBarHeight: app.globalData.statusBarHeight || 0
-    });
+    this.setData({ statusBarHeight: app.globalData.statusBarHeight || 0 });
     this.loadMockData();
   },
 
   onShow() {
+    // 重新展示时恢复通知轮播
+    if (this.data.showNotice && this.data.notices.length > 1 && !this._noticeTimer) {
+      this.startNoticeScroll();
+    }
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 0 });
     }
   },
 
   loadMockData() {
+    // 清理旧定时器再创建，避免竞态
+    if (this._noticeTimer) {
+      clearInterval(this._noticeTimer);
+      this._noticeTimer = null;
+    }
     this.setData({
       banners: mock.banners,
       services: mock.services,
@@ -37,13 +44,12 @@ Page({
       cases: mock.cases,
       notices: mock.notices
     });
-
     this.startNoticeScroll();
   },
 
   startNoticeScroll() {
     if (this.data.notices.length <= 1) return;
-
+    if (this._noticeTimer) return; // 已有定时器不重复创建
     this._noticeTimer = setInterval(() => {
       const { currentNoticeIndex, notices } = this.data;
       const next = (currentNoticeIndex + 1) % notices.length;
@@ -51,25 +57,23 @@ Page({
     }, 3000);
   },
 
-  onUnload() {
+  _clearNoticeTimer() {
     if (this._noticeTimer) {
       clearInterval(this._noticeTimer);
       this._noticeTimer = null;
     }
+  },
+
+  onUnload() {
+    this._clearNoticeTimer();
   },
 
   onHide() {
-    if (this._noticeTimer) {
-      clearInterval(this._noticeTimer);
-      this._noticeTimer = null;
-    }
+    this._clearNoticeTimer();
   },
 
   handleCloseNotice() {
-    if (this._noticeTimer) {
-      clearInterval(this._noticeTimer);
-      this._noticeTimer = null;
-    }
+    this._clearNoticeTimer();
     this.setData({ showNotice: false });
   },
 
@@ -78,24 +82,31 @@ Page({
   },
 
   onServiceSelect(e) {
-    const { id, name } = e.detail;
-    wx.navigateTo({
-      url: `/pages/service/detail/detail?id=${id}&name=${name}`
-    });
+    const { id } = e.detail;
+    wx.navigateTo({ url: '/pages/service/detail/detail?id=' + id });
   },
 
   onPackageSelect(e) {
     const { id } = e.detail;
-    wx.navigateTo({
-      url: `/pages/package/detail/detail?id=${id}`
-    });
+    wx.navigateTo({ url: '/pages/package/detail/detail?id=' + id });
   },
 
   onCaseSelect(e) {
     const { id } = e.detail;
-    wx.navigateTo({
-      url: `/pages/case/detail/detail?id=${id}`
-    });
+    wx.navigateTo({ url: '/pages/case/detail/detail?id=' + id });
+  },
+
+  /** 补充缺失事件处理 */
+  onTapMorePackages() {
+    wx.switchTab({ url: '/pages/service/list/list' });
+  },
+
+  onTapMoreCases() {
+    wx.switchTab({ url: '/pages/service/list/list' });
+  },
+
+  onTapLocation() {
+    wx.showToast({ title: '天津市', icon: 'none' });
   },
 
   onPageScroll(e) {

@@ -20,19 +20,32 @@ Page({
     canSubmit: false
   },
 
+  /** 捕获 URL 参数（来自服务列表页 navigateTo） */
+  onLoad(options) {
+    this._pendingQuery = options || {};
+  },
+
   onShow() {
     const app = getApp();
-    const serviceId = app.globalData.selectedServiceId || null;
+
+    // 同时支持 globalData（服务详情页 switchTab）和 URL 参数（服务列表页 navigateTo）
+    let serviceId = app.globalData.selectedServiceId || (this._pendingQuery && this._pendingQuery.serviceId) || null;
+
     if (!serviceId) {
       wx.showToast({ title: '请从服务详情页预约', icon: 'none' });
       return;
     }
+
     const service = mock.getServiceDetail(serviceId);
     if (!service) {
       wx.showToast({ title: '服务不存在', icon: 'none' });
       setTimeout(() => wx.navigateBack(), 1500);
       return;
     }
+
+    // 使用后清除，避免 Tab 切换后仍显示旧服务
+    app.globalData.selectedServiceId = null;
+    this._pendingQuery = null;
 
     const pets = mock.getPetProfiles();
     const dates = mock.getAvailableDates();
@@ -63,9 +76,7 @@ Page({
   },
 
   handleAddPet() {
-    wx.navigateTo({
-      url: '/pages/pet/edit/edit'
-    });
+    wx.navigateTo({ url: '/pages/pet/edit/edit' });
   },
 
   handleDateSelect(e) {
@@ -121,10 +132,7 @@ Page({
           } else if (coupon.type === 'percent') {
             discount = Math.round(this.data.service.price * coupon.value / 100);
           }
-          this.setData({
-            selectedCoupon: coupon,
-            couponDiscount: discount
-          });
+          this.setData({ selectedCoupon: coupon, couponDiscount: discount });
         }
         this._calcFinalPrice();
       }
@@ -149,20 +157,6 @@ Page({
   },
 
   handleSubmit() {
-    if (!app.globalData.isLogin) {
-      wx.showModal({
-        title: '提示',
-        content: '请先登录后再提交预约',
-        confirmText: '去登录',
-        success: (res) => {
-          if (res.confirm) {
-            wx.switchTab({ url: '/pages/user/index/index' });
-          }
-        }
-      });
-      return;
-    }
-
     if (this.data.pets.length === 0) {
       wx.showToast({ title: '请先添加宠物档案', icon: 'none' });
       return;
@@ -182,7 +176,7 @@ Page({
       wx.hideLoading();
       wx.showModal({
         title: '预约成功',
-        content: `已预约${service.name}服务\n宠物：${pet ? pet.name : ''}\n时间：${this.data.selectedDate} ${this.data.selectedTimeSlot === 'morning' ? '上午' : '下午'}\n地址：${address ? address.district : ''}`,
+        content: '已预约' + service.name + '服务\n宠物：' + (pet ? pet.name : '') + '\n时间：' + this.data.selectedDate + ' ' + (this.data.selectedTimeSlot === 'morning' ? '上午' : '下午') + '\n地址：' + (address ? address.district : ''),
         confirmText: '查看订单',
         cancelText: '返回首页',
         success: (res) => {

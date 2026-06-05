@@ -23,7 +23,7 @@ function formatNumber(n) {
 }
 
 function formatPrice(price) {
-  return (price / 100).toFixed(2);
+  return Number(price).toFixed(2);
 }
 
 function debounce(fn, delay = 300) {

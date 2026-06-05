@@ -11,17 +11,26 @@ Page({
     this.setData({ userInfo });
   },
 
+  /** 修复：使用单一定时器避免竞态 */
   onVersionTap() {
     const count = this.data.adminTapCount + 1;
     this.setData({ adminTapCount: count });
     if (count >= 5) {
       this.setData({ adminTapCount: 0 });
-      wx.navigateTo({ url: '/pages/admin/index/index' });
-    }
-    setTimeout(() => {
-      if (this.data.adminTapCount > 0) {
-        this.setData({ adminTapCount: 0 });
+      if (this._adminTimer) {
+        clearTimeout(this._adminTimer);
+        this._adminTimer = null;
       }
+      wx.navigateTo({ url: '/pages/admin/index/index' });
+      return;
+    }
+    // 清除旧定时器，重新计时（实现"最后一次点击后3秒重置"的效果）
+    if (this._adminTimer) {
+      clearTimeout(this._adminTimer);
+    }
+    this._adminTimer = setTimeout(() => {
+      this.setData({ adminTapCount: 0 });
+      this._adminTimer = null;
     }, 3000);
   },
 

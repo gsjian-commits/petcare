@@ -1,4 +1,4 @@
-const mock = require('../../utils/mock');
+const mock = require('../../../utils/mock');
 
 Page({
   data: {
@@ -11,7 +11,7 @@ Page({
 
   onLoad(options) {
     const { id } = options;
-    const pkgData = mock.packages.find(p => p.id === Number(id));
+    const pkgData = mock.packages.find(p => String(p.id) === String(id));
 
     if (!pkgData) {
       wx.showToast({ title: '套餐不存在', icon: 'none' });
@@ -20,23 +20,34 @@ Page({
     }
 
     const detailData = this._generateDetailData(pkgData);
-
-    this.setData({
-      pkg: pkgData,
-      ...detailData
-    });
-
+    this.setData({ pkg: pkgData, ...detailData });
     wx.setNavigationBarTitle({ title: pkgData.name });
   },
 
+  /** 修复：根据真实套餐数据生成内容 */
   _generateDetailData(pkgData) {
-    // 4格特性
-    const features = [
-      { icon: '⏰', label: '灵活预约' },
-      { icon: '👤', label: '专属管家' },
-      { icon: '📸', label: '实时反馈' },
-      { icon: '🛡️', label: '保险保障' }
-    ];
+    // 使用套餐真实特性 + 通用特性
+    const features = (pkgData.features || []).map(f => ({
+      icon: this._featureIcon(f),
+      label: f
+    }));
+
+    // 如果特性不足4个，补充通用特性
+    while (features.length < 4) {
+      const fallbacks = [
+        { icon: '📸', label: '实时反馈' },
+        { icon: '🛡️', label: '保险保障' },
+        { icon: '⏰', label: '灵活预约' },
+        { icon: '👤', label: '专属管家' }
+      ];
+      for (const fb of fallbacks) {
+        if (!features.find(f => f.label === fb.label)) {
+          features.push(fb);
+          break;
+        }
+      }
+      if (features.length >= 4) break;
+    }
 
     // 购买须知
     const purchaseNotes = [
@@ -66,17 +77,35 @@ Page({
     return { features, purchaseNotes, faq };
   },
 
+  _featureIcon(feature) {
+    const map = {
+      '每日一次上门': '🔑',
+      '喂食换水': '🍽️',
+      '短时遛弯': '🚶',
+      '每日反馈照片': '📸',
+      '上门环境评估': '📋',
+      '喂养方案定制': '📝',
+      '基础护理教学': '📖',
+      '24h在线答疑': '💬',
+      '每日两次上门': '🔑',
+      '全部宠物照看': '🐾',
+      '基础洗护包含': '🛁',
+      '紧急情况处理': '🚨',
+      '全年不限次上门': '♾️',
+      '优先预约通道': '⚡',
+      '专属管家一对一': '👤',
+      '免费年度体检': '🏥'
+    };
+    return map[feature] || '✨';
+  },
+
   handleBuy() {
-    wx.navigateTo({
-      url: `/pages/order/create/create?packageId=${this.data.pkg.id}`
-    });
+    wx.navigateTo({ url: '/pages/order/create/create?packageId=' + this.data.pkg.id });
   },
 
   toggleFaq(e) {
     const { index } = e.currentTarget.dataset;
-    this.setData({
-      faqOpenIndex: this.data.faqOpenIndex === index ? -1 : index
-    });
+    this.setData({ faqOpenIndex: this.data.faqOpenIndex === index ? -1 : index });
   },
 
   handleBack() {

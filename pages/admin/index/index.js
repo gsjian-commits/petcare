@@ -22,7 +22,7 @@ Page({
   },
 
   loadData() {
-    const allOrders = mock.getOrders();
+    const allOrders = mock.getDynamicOrders();
     const stats = this.calcStats(allOrders);
     const orders = this.filterOrders(allOrders, this.data.currentTab);
     this.setData({ stats, orders });
@@ -30,7 +30,7 @@ Page({
 
   calcStats(allOrders) {
     const today = new Date();
-    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
 
     const todayOrders = allOrders.filter(o =>
       o.createdAt && o.createdAt.startsWith(todayStr)
@@ -58,11 +58,12 @@ Page({
   switchTab(e) {
     const key = e.currentTarget.dataset.key;
     this.setData({ currentTab: key });
-    const allOrders = mock.getOrders();
+    const allOrders = mock.getDynamicOrders();
     const orders = this.filterOrders(allOrders, key);
     this.setData({ orders });
   },
 
+  /** 修复：操作持久化到 mock 数据 */
   confirmOrder(e) {
     const id = e.currentTarget.dataset.id;
     wx.showModal({
@@ -70,8 +71,12 @@ Page({
       content: '确认接受该服务订单？',
       success: (res) => {
         if (res.confirm) {
-          wx.showToast({ title: '已接单', icon: 'success' });
-          this.loadData();
+          if (mock.updateOrderStatus(id, 'in_progress')) {
+            wx.showToast({ title: '已接单', icon: 'success' });
+            this.loadData();
+          } else {
+            wx.showToast({ title: '订单不存在', icon: 'none' });
+          }
         }
       }
     });
@@ -84,8 +89,12 @@ Page({
       content: '确认该服务已完成？',
       success: (res) => {
         if (res.confirm) {
-          wx.showToast({ title: '已标记完成', icon: 'success' });
-          this.loadData();
+          if (mock.updateOrderStatus(id, 'completed')) {
+            wx.showToast({ title: '已标记完成', icon: 'success' });
+            this.loadData();
+          } else {
+            wx.showToast({ title: '订单不存在', icon: 'none' });
+          }
         }
       }
     });

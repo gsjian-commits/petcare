@@ -12,10 +12,10 @@ Page({
     this.loadCoupons('available');
   },
 
+  /** 修复：使用按日期校验的优惠券数据 */
   loadCoupons(status) {
-    const allCoupons = mock.getAllCoupons();
-    const filtered = allCoupons.filter(c => c.status === status);
-    const availableCount = allCoupons.filter(c => c.status === 'available').length;
+    const filtered = mock.getDynamicCouponsByStatus(status);
+    const availableCount = mock.getDynamicCouponsByStatus('available').length;
     const labels = { available: '可用', used: '已用', expired: '已过期' };
     this.setData({
       coupons: filtered,

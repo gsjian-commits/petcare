@@ -12,11 +12,7 @@ Page({
     const categories = mock.services;
     const activeCategoryId = options.categoryId || (categories[0] && categories[0].id) || '';
 
-    this.setData({
-      categories,
-      activeCategoryId
-    });
-
+    this.setData({ categories, activeCategoryId });
     this.loadServiceList();
   },
 
@@ -40,15 +36,14 @@ Page({
 
   handleServiceTap(e) {
     const { id } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/pages/service/detail/detail?id=${id}`
-    });
+    wx.navigateTo({ url: '/pages/service/detail/detail?id=' + id });
   },
 
+  /** 修复：改用 globalData + switchTab，与 service/detail 保持一致 */
   handleBookTap(e) {
     const { id } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/pages/order/create/create?serviceId=${id}`
-    });
+    const app = getApp();
+    app.globalData.selectedServiceId = id;
+    wx.switchTab({ url: '/pages/order/create/create' });
   }
 });

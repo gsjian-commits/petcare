@@ -1257,6 +1257,47 @@ function getReports() {
   return reports;
 }
 
+
+// ====== 动态日期工具（解决 mock 日期硬编码问题）======
+
+function getDynamicOrders() {
+  const today = new Date();
+  return orders.map((o, i) => {
+    const d = new Date(today);
+    d.setDate(d.getDate() - (orders.length - i) * 2);
+    return Object.assign({}, o, {
+      date: formatDateStr(d),
+      createdAt: formatDateStr(d) + ' ' + ['08:00','10:00','14:00','16:00'][i % 4],
+    });
+  });
+}
+
+function getDynamicCoupons() {
+  const now = new Date();
+  return couponsAll.map(c => {
+    const expire = new Date(c.expireDate);
+    let actualStatus = c.status;
+    if (c.status === 'available' && expire < now) actualStatus = 'expired';
+    if (c.status === 'expired' && expire >= now) actualStatus = 'available';
+    return Object.assign({}, c, { status: actualStatus });
+  });
+}
+
+function getDynamicCouponsByStatus(status) {
+  const all = getDynamicCoupons();
+  if (!status || status === 'all') return all;
+  return all.filter(c => c.status === status);
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  const order = orders.find(o => o.id === orderId);
+  if (!order) return false;
+  order.status = newStatus;
+  const labels = { pending_payment: '待支付', pending_service: '待服务', in_progress: '服务中', completed: '已完成', cancelled: '已取消' };
+  order.statusLabel = labels[newStatus] || order.statusLabel;
+  return true;
+}
+
 module.exports = {
   banners,
   notices,
@@ -1297,5 +1338,9 @@ module.exports = {
   getUserInfo,
   getReportById,
   getReportByOrderId,
+  getDynamicOrders,
+  getDynamicCoupons,
+  getDynamicCouponsByStatus,
+  updateOrderStatus,
   getReports
 };

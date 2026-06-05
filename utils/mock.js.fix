@@ -1,0 +1,32 @@
+// ===== 在文件末尾，最后一个 module.exports 之前插入 =====
+
+// 获取动态日期的订单
+function getDynamicOrders() {
+  const today = new Date();
+  return orders.map((o, i) => {
+    // 按索引偏移天数，使订单分布在近期的日期上
+    const d = new Date(today);
+    d.setDate(d.getDate() - (orders.length - i - 1) * 2);
+    return {
+      ...o,
+      date: formatDateStr(d),
+      createdAt: formatDateStr(d) + ' ' + ['08:00','10:00','14:00','16:00'][i % 4],
+    };
+  });
+}
+
+// 获取动态有效优惠券（按日期校验状态）
+function getValidCoupons() {
+  const now = new Date();
+  return couponsAll.map(c => {
+    const expire = new Date(c.expireDate);
+    const actualStatus = expire < now ? 'expired' : c.status === 'used' ? 'used' : 'available';
+    return { ...c, status: actualStatus };
+  });
+}
+
+module.exports = {
+  // ... 保留原有 exports ...
+  getDynamicOrders,
+  getValidCoupons,
+};
